@@ -1,0 +1,1022 @@
+Test (2D): install snapshots (disconnect) ...
+--------------------------------------------------
+id: 1 state: Leader,term: 2,committed: 0, lastApplied: 0, logs: [{0 <nil> 0}]
+nextIndex: [0]->1 [2]->1 
+matchIndex: [0]->0 [2]->0 
+--------------------------------------------------
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:0, PrevLogTerm:0, Entries:[]raft.Log{}, LeaderCommit:0}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:0, PrevLogTerm:0, Entries:[]raft.Log{}, LeaderCommit:0}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 0, prevTerm 0
+[1]: 2 append success: next 1 match 0
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 0, prevTerm 0
+[1]: 0 append success: next 1 match 0
+[1]: term 2 Start {2 -1 1}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:0, PrevLogTerm:0, Entries:[]raft.Log{raft.Log{Term:2, Cmd:-1, Index:1}}, LeaderCommit:0}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:0, PrevLogTerm:0, Entries:[]raft.Log{raft.Log{Term:2, Cmd:-1, Index:1}}, LeaderCommit:0}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 -1 1}], prevIndex 0, prevTerm 0
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 -1 1}], prevIndex 0, prevTerm 0
+[1]: 2 append success: next 2 match 1
+[1]: COMMIT 1: &raft.Log{Term:2, Cmd:-1, Index:1}
+[1]: 0 append success: next 2 match 1
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[1]: 2 append success: next 2 match 1
+[2]: COMMIT 1: &raft.Log{Term:2, Cmd:-1, Index:1}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[1]: 0 append success: next 2 match 1
+[0]: COMMIT 1: &raft.Log{Term:2, Cmd:-1, Index:1}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[1]: 2 append success: next 2 match 1
+[1]: 0 append success: next 2 match 1
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[1]: 2 append success: next 2 match 1
+[1]: 0 append success: next 2 match 1
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[1]: 0 append success: next 2 match 1
+[1]: 2 append success: next 2 match 1
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[1]: 2 append success: next 2 match 1
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[1]: 0 append success: next 2 match 1
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:1}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[1]: 2 append success: next 2 match 1
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 1, prevTerm 2
+[1]: 0 append success: next 2 match 1
+2 disconnected
+[1]: term 2 Start {2 50 2}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}}, LeaderCommit:1}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}}, LeaderCommit:1}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 50 2}], prevIndex 1, prevTerm 2
+[1]: 0 append success: next 3 match 2
+[1]: COMMIT 2: &raft.Log{Term:2, Cmd:50, Index:2}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}}, LeaderCommit:2}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 2, prevTerm 2
+[0]: COMMIT 2: &raft.Log{Term:2, Cmd:50, Index:2}
+[1]: 0 append success: next 3 match 2
+[1]: term 2 Start {2 0 3}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}}, LeaderCommit:2}
+[1]: term 2 Start {2 1 4}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}}, LeaderCommit:2}
+[1]: term 2 Start {2 2 5}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}}, LeaderCommit:2}
+[1]: term 2 Start {2 3 6}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}}, LeaderCommit:2}
+[1]: term 2 Start {2 4 7}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}}, LeaderCommit:2}
+[1]: term 2 Start {2 5 8}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}}, LeaderCommit:2}
+[1]: term 2 Start {2 6 9}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4}], prevIndex 2, prevTerm 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}}, LeaderCommit:2}
+[1]: term 2 Start {2 7 10}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}}, LeaderCommit:2}
+[1]: term 2 Start {2 8 11}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}}, LeaderCommit:2}
+[1]: term 2 Start {2 9 12}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}}, LeaderCommit:2}
+[1]: term 2 Start {2 10 13}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}}, LeaderCommit:2}
+[1]: term 2 Start {2 20 14}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:2, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}}, LeaderCommit:2}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:1, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:50, Index:2}, raft.Log{Term:2, Cmd:0, Index:3}, raft.Log{Term:2, Cmd:1, Index:4}, raft.Log{Term:2, Cmd:2, Index:5}, raft.Log{Term:2, Cmd:3, Index:6}, raft.Log{Term:2, Cmd:4, Index:7}, raft.Log{Term:2, Cmd:5, Index:8}, raft.Log{Term:2, Cmd:6, Index:9}, raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}}, LeaderCommit:2}
+[1]: 0 append success: next 5 match 4
+[1]: COMMIT 3: &raft.Log{Term:2, Cmd:0, Index:3}
+[1]: COMMIT 4: &raft.Log{Term:2, Cmd:1, Index:4}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5}], prevIndex 2, prevTerm 2
+[1]: 0 append success: next 6 match 5
+[1]: COMMIT 5: &raft.Log{Term:2, Cmd:2, Index:5}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5} {2 3 6}], prevIndex 2, prevTerm 2
+[1]: 0 append success: next 7 match 6
+[1]: COMMIT 6: &raft.Log{Term:2, Cmd:3, Index:6}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5} {2 3 6} {2 4 7} {2 5 8} {2 6 9}], prevIndex 2, prevTerm 2
+[1]: 0 append success: next 10 match 9
+[1]: COMMIT 7: &raft.Log{Term:2, Cmd:4, Index:7}
+[1]: COMMIT 8: &raft.Log{Term:2, Cmd:5, Index:8}
+[1]: COMMIT 9: &raft.Log{Term:2, Cmd:6, Index:9}
+[1] made snapshot at 9, Log: [{2 <nil> 9} {2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14}], lastIncludedIndex: 9, lastIncludedTerm: 2
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5} {2 3 6} {2 4 7}], prevIndex 2, prevTerm 2
+[1]: 0 append success: next 10 match 9
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5} {2 3 6} {2 4 7} {2 5 8} {2 6 9} {2 7 10}], prevIndex 2, prevTerm 2
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5} {2 3 6} {2 4 7} {2 5 8}], prevIndex 2, prevTerm 2
+[1]: 0 append success: next 11 match 10
+[1]: COMMIT 10: &raft.Log{Term:2, Cmd:7, Index:10}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5} {2 3 6} {2 4 7} {2 5 8} {2 6 9} {2 7 10} {2 8 11} {2 9 12}], prevIndex 2, prevTerm 2
+[1]: 0 append success: next 11 match 10
+[1]: 0 append success: next 13 match 12
+[1]: COMMIT 11: &raft.Log{Term:2, Cmd:8, Index:11}
+[1]: COMMIT 12: &raft.Log{Term:2, Cmd:9, Index:12}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5} {2 3 6} {2 4 7} {2 5 8} {2 6 9} {2 7 10} {2 8 11}], prevIndex 2, prevTerm 2
+[1]: 0 append success: next 13 match 12
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5} {2 3 6} {2 4 7} {2 5 8} {2 6 9} {2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14}], prevIndex 2, prevTerm 2
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3} {2 1 4} {2 2 5} {2 3 6} {2 4 7} {2 5 8} {2 6 9} {2 7 10} {2 8 11} {2 9 12} {2 10 13}], prevIndex 2, prevTerm 2
+[1]: 0 append success: next 15 match 14
+[1]: COMMIT 13: &raft.Log{Term:2, Cmd:10, Index:13}
+[1]: COMMIT 14: &raft.Log{Term:2, Cmd:20, Index:14}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 0 3}], prevIndex 2, prevTerm 2
+[1]: 0 append success: next 15 match 14
+[1]: 0 append success: next 15 match 14
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:14, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:14}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}}, LeaderCommit:14}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 14, prevTerm 2
+[1]: 0 append success: next 15 match 14
+[0]: COMMIT 3: &raft.Log{Term:2, Cmd:0, Index:3}
+[0]: COMMIT 4: &raft.Log{Term:2, Cmd:1, Index:4}
+[0]: COMMIT 5: &raft.Log{Term:2, Cmd:2, Index:5}
+[0]: COMMIT 6: &raft.Log{Term:2, Cmd:3, Index:6}
+[0]: COMMIT 7: &raft.Log{Term:2, Cmd:4, Index:7}
+[0]: COMMIT 8: &raft.Log{Term:2, Cmd:5, Index:8}
+[0]: COMMIT 9: &raft.Log{Term:2, Cmd:6, Index:9}
+[0]: COMMIT 10: &raft.Log{Term:2, Cmd:7, Index:10}
+[0]: COMMIT 11: &raft.Log{Term:2, Cmd:8, Index:11}
+[0]: COMMIT 12: &raft.Log{Term:2, Cmd:9, Index:12}
+[0]: COMMIT 13: &raft.Log{Term:2, Cmd:10, Index:13}
+[0]: COMMIT 14: &raft.Log{Term:2, Cmd:20, Index:14}
+2 connected
+[1]: term 2 Start {2 100 15}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:14, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:14}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:14}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 100 15}], prevIndex 14, prevTerm 2
+[1]: 0 append success: next 16 match 15
+[1]: COMMIT 15: &raft.Log{Term:2, Cmd:100, Index:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: COMMIT 15: &raft.Log{Term:2, Cmd:100, Index:15}
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: 0 append success: next 16 match 15
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: 0 append success: next 16 match 15
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 16 match 15
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 16 match 15
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: 0 append success: next 16 match 15
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 16 match 15
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 16 match 15
+[1]: term 2 Start {2 100 16}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:15, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:15}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:15}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 100 16}], prevIndex 15, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]: COMMIT 16: &raft.Log{Term:2, Cmd:100, Index:16}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: COMMIT 16: &raft.Log{Term:2, Cmd:100, Index:16}
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[1]: 0 append success: next 17 match 16
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 17 match 16
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 17 match 16
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 17 match 16
+[1]: term 2 Start {2 100 17}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:16, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:16}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:16}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 100 17}], prevIndex 16, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]: COMMIT 17: &raft.Log{Term:2, Cmd:100, Index:17}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: COMMIT 17: &raft.Log{Term:2, Cmd:100, Index:17}
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 18 match 17
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: 0 append success: next 18 match 17
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: 0 append success: next 18 match 17
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 18 match 17
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: 0 append success: next 18 match 17
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 18 match 17
+[1]: term 2 Start {2 100 18}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:17, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:17}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:17}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 100 18}], prevIndex 17, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 19 match 18
+[1]: COMMIT 18: &raft.Log{Term:2, Cmd:100, Index:18}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 19 match 18
+[0]: COMMIT 18: &raft.Log{Term:2, Cmd:100, Index:18}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: 0 append success: next 19 match 18
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 19 match 18
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: 0 append success: next 19 match 18
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 19 match 18
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: 0 append success: next 19 match 18
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 19 match 18
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 19 match 18
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 19 match 18
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}}, LeaderCommit:18}
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 18, prevTerm 2
+[1]: 0 append success: next 19 match 18
+[1]: term 2 Start {2 100 19}
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:18, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:100, Index:19}}, LeaderCommit:18}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:9, PrevLogTerm:2, Entries:[]raft.Log{raft.Log{Term:2, Cmd:7, Index:10}, raft.Log{Term:2, Cmd:8, Index:11}, raft.Log{Term:2, Cmd:9, Index:12}, raft.Log{Term:2, Cmd:10, Index:13}, raft.Log{Term:2, Cmd:20, Index:14}, raft.Log{Term:2, Cmd:100, Index:15}, raft.Log{Term:2, Cmd:100, Index:16}, raft.Log{Term:2, Cmd:100, Index:17}, raft.Log{Term:2, Cmd:100, Index:18}, raft.Log{Term:2, Cmd:100, Index:19}}, LeaderCommit:18}
+[0]: (term 2) follower 收到 [1] AppendEntries [{2 100 19}], prevIndex 18, prevTerm 2
+[1]: 0 append success: next 20 match 19
+[1]: COMMIT 19: &raft.Log{Term:2, Cmd:100, Index:19}
+[1] made snapshot at 19, Log: [{2 <nil> 19}], lastIncludedIndex: 19, lastIncludedTerm: 2
+[2]: (term 2) follower 收到 [1] AppendEntries [{2 7 10} {2 8 11} {2 9 12} {2 10 13} {2 20 14} {2 100 15} {2 100 16} {2 100 17} {2 100 18} {2 100 19}], prevIndex 9, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 20 match 19
+[0]: COMMIT 19: &raft.Log{Term:2, Cmd:100, Index:19}
+[0] made snapshot at 19, Log: [{2 <nil> 19}], lastIncludedIndex: 19, lastIncludedTerm: 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 20 match 19
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 20 match 19
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 20 match 19
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: 0 append success: next 20 match 19
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 20 match 19
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: 0 append success: next 20 match 19
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: 0 append success: next 20 match 19
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: 0 append success: next 20 match 19
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: 0 append success: next 20 match 19
+[1]:leader send appendentries to 0,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[1]:leader send appendentries to 2,raft.AppendEntriesArgs{Term:2, LeaderId:1, PrevLogIndex:19, PrevLogTerm:2, Entries:[]raft.Log{}, LeaderCommit:19}
+[0]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[1]: 0 append success: next 20 match 19
+[2]: (term 2) follower 收到 [1] AppendEntries [], prevIndex 19, prevTerm 2
+[2]: Conflict XTerm -1, XIndex -1, XLen 2
+[1]: Conflict from 2 raft.AppendEntriesReply{Term:2, Success:false, XTerm:-1, XIndex:-1, Conflit:true, XLen:2}
+[1]: leader nextIndex[2] 2
+--- FAIL: TestSnapshotInstall2D (11.16s)
+    config.go:547: one(100) failed to reach agreement
+FAIL
+exit status 1
+FAIL	6.824/raft	11.161s
