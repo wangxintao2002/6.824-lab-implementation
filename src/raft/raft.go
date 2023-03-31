@@ -491,6 +491,7 @@ func (rf *Raft) sendAppendEntries(server int, args *AppendEntriesArgs, reply *Ap
 	return ok
 }
 
+// TODO: 实现PreVote机制
 func (rf *Raft) startElection() {
 	rf.currentTerm++
 	rf.state = Candidate
@@ -637,6 +638,7 @@ func (rf *Raft) printState() {
 	fmt.Printf("\n--------------------------------------------------\n")
 }
 
+// TODO: 实现Leader checkQuorum机制
 func (rf *Raft) leaderAppendEntries(heartbeat bool) {
 	rf.resetTimer()
 	for i := range rf.peers {
