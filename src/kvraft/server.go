@@ -4,6 +4,7 @@ import (
 	"6.824/labgob"
 	"6.824/labrpc"
 	"6.824/raft"
+	"fmt"
 	"log"
 	"sync"
 	"sync/atomic"
@@ -22,9 +23,9 @@ type Op struct {
 	// Your definitions here.
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
-	Put    string
-	Append string
-	Get    string
+	Type  string
+	Key   string
+	Value string
 }
 
 type KVServer struct {
@@ -35,16 +36,56 @@ type KVServer struct {
 	dead    int32 // set by Kill()
 
 	maxraftstate int // snapshot if log grows this big
+	seqNumberSet Set // last seqNumber this server has handled
+	data         map[string]string
+	applyCond    *sync.Cond
+	lastApplied  int
 
 	// Your definitions here.
 }
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
+	kv.mu.Lock()
+	defer kv.mu.Unlock()
+	index, term, isLeader := kv.rf.Start(Op{
+		Type: "Get",
+		Key:  args.Key,
+	})
+	if !isLeader {
+		reply.Err = ErrWrongLeader
+		return
+	}
+	// TODO: wait until raft commit this command
+	// Bug: no requests, no apply
+	ok := kv.apply(index, term)
+	if !ok {
+		reply.Err = ErrOperation
+		return
+	}
+	reply.Err = OK
+	reply.Value = kv.data[args.Key]
 }
 
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	// Your code here.
+	kv.mu.Lock()
+	defer kv.mu.Unlock()
+	if kv.seqNumberSet.Has(args.SeqNumber) {
+		reply.Err = ErrDuplicatedRequest
+		return
+	}
+	index, term, isLeader := kv.rf.Start(Op{Type: args.Op, Key: args.Key, Value: args.Value})
+	if !isLeader {
+		reply.Err = ErrWrongLeader
+		return
+	}
+	ok := kv.apply(index, term)
+	if !ok {
+		reply.Err = ErrOperation
+		return
+	}
+	reply.Err = OK
 }
 
 // Kill
@@ -88,13 +129,48 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv := new(KVServer)
 	kv.me = me
 	kv.maxraftstate = maxraftstate
-
+	kv.seqNumberSet = make(Set)
+	kv.data = make(map[string]string)
 	// You may need initialization code here.
 
 	kv.applyCh = make(chan raft.ApplyMsg)
 	kv.rf = raft.Make(servers, me, persister, kv.applyCh)
+	kv.applyCond = sync.NewCond(&kv.mu)
+	kv.lastApplied = 0
 
 	// You may need initialization code here.
 
 	return kv
+}
+
+func (kv *KVServer) apply(index int, term int) bool {
+	for m := range kv.applyCh {
+		if m.SnapshotValid {
+			kv.rf.CondInstallSnapshot(m.SnapshotTerm, m.SnapshotIndex, m.Snapshot)
+			kv.lastApplied = m.SnapshotIndex
+		} else if m.CommandValid && kv.lastApplied < m.CommandIndex { // after installing snapshot, lastApplied may increase
+			command := m.Command.(Op)
+			value, ok := kv.data[command.Key]
+			if command.Type == "Put" || command.Type == "Append" && !ok {
+				fmt.Printf("Append or Put key:%v value:%v ok(command index: %d)\n", command.Key, command.Value, m.CommandIndex)
+				kv.data[command.Key] = command.Value
+			} else if command.Type == "Append" {
+				fmt.Printf("Append key:%v value:%v ok(command index: %d)\n", command.Key, command.Value, m.CommandIndex)
+				kv.data[command.Key] += value
+			} else if command.Type == "Get" {
+				fmt.Printf("Get key:%v ok(command index: %d)\n", command.Key, m.CommandIndex)
+			}
+			kv.lastApplied = m.CommandIndex
+			// Log Matching rule
+			if index == m.CommandIndex {
+				if term == m.CommandTerm {
+					return true
+				} else {
+					return false
+				}
+			}
+			// TODO: make snapshot
+		}
+	}
+	return false
 }

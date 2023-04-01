@@ -42,6 +42,7 @@ type ApplyMsg struct {
 	CommandValid bool
 	Command      interface{}
 	CommandIndex int
+	CommandTerm  int
 
 	// For 2D:
 	SnapshotValid bool
@@ -721,7 +722,6 @@ func (rf *Raft) slice(index int) []Log {
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	index := -1
 	term := -1
-	isLeader := true
 
 	// Your code here (2B).
 	rf.mu.Lock()
@@ -735,12 +735,12 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	term = rf.currentTerm
 	index = rf.lastLog().Index + 1
 	log := Log{Term: term, Cmd: command, Index: index}
-	//fmt.Printf("[%v]: term %v Start %v\n", rf.me, term, log)
+	fmt.Printf("[%v]: term %v Start %#v\n", rf.me, term, log)
 	rf.logs = append(rf.logs, log)
 	rf.persist()
 	// index start from 1
 	rf.leaderAppendEntries(false)
-	return index, term, isLeader
+	return index, term, true
 }
 
 // Kill the tester doesn't halt goroutines created by Raft after each test,
@@ -846,8 +846,9 @@ func (rf *Raft) applier() {
 				CommandValid: true,
 				Command:      rf.logAt(rf.lastApplied).Cmd,
 				CommandIndex: rf.lastApplied,
+				CommandTerm:  rf.logAt(rf.lastApplied).Term,
 			}
-			//fmt.Printf("[%v]: COMMIT %d: %#v\n", rf.me, rf.lastApplied, rf.logAt(rf.lastApplied))
+			fmt.Printf("[%v]: COMMIT %d: %#v\n", rf.me, rf.lastApplied, rf.logAt(rf.lastApplied))
 			rf.mu.Unlock()
 			rf.applyCh <- applyMsg
 			rf.mu.Lock()

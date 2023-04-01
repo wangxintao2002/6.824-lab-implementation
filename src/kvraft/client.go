@@ -1,14 +1,18 @@
 package kvraft
 
-import "6.824/labrpc"
+import (
+	"6.824/labrpc"
+	"fmt"
+)
 import "crypto/rand"
 import "math/big"
 
 type Clerk struct {
 	servers []*labrpc.ClientEnd
 	// You will have to modify this struct.
-	clerkId   int64
-	seqNumber int64
+	clerkId    int64
+	seqNumber  int64
+	lastLeader int
 }
 
 func nrand() int64 {
@@ -22,7 +26,8 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck := new(Clerk)
 	ck.servers = servers
 	ck.clerkId = nrand()
-	ck.seqNumber = int64(0)
+	ck.seqNumber = nrand()
+	ck.lastLeader = ck.randomServer()
 	// You'll have to add code here.
 	return ck
 }
@@ -39,19 +44,23 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 // must match the declared types of the RPC handler function's
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) Get(key string) string {
-	args := GetArgs{Key: key, ClerkId: ck.clerkId, SeqNumber: ck.seqNumber}
+	args := GetArgs{Key: key, ClerkId: ck.clerkId}
 	reply := GetReply{}
 	// choose a random server to request
-	server := ck.randomServer()
+	server := ck.lastLeader
+	fmt.Printf("%d Get key:%v\n", ck.clerkId, key)
 	// keep trying forever
-	for !ck.servers[server].Call("KVServer.Get", &args, &reply) {
-	}
-	if reply.Err == ErrWrongLeader {
-		server = ck.randomServer()
-	} else if reply.Err == OK {
-		return reply.Value
-	} else if reply.Err == ErrNoKey {
-		return ""
+	for true {
+		for !ck.servers[server].Call("KVServer.Get", &args, &reply) {
+		}
+		if reply.Err == ErrWrongLeader {
+			server = ck.randomServer()
+		} else if reply.Err == OK {
+			ck.lastLeader = server
+			return reply.Value
+		} else if reply.Err == ErrNoKey {
+			return ""
+		}
 	}
 	return ""
 }
@@ -60,6 +69,7 @@ func (ck *Clerk) randomServer() int {
 	max := big.NewInt(int64(len(ck.servers) - 1))
 	bigx, _ := rand.Int(rand.Reader, max)
 	server := int(bigx.Int64())
+	// fmt.Printf("%d choose %d\n", ck.clerkId, server)
 	return server
 }
 
@@ -82,8 +92,18 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 		SeqNumber: ck.seqNumber,
 	}
 	reply := PutAppendReply{}
-	server := ck.randomServer()
-	for !ck.servers[server].Call("KVServer.PutAppend", &args, &reply) {
+	server := ck.lastLeader
+	fmt.Printf("%d %s key:%v, value: %v\n", ck.clerkId, op, key, value)
+	for true {
+		for !ck.servers[server].Call("KVServer.PutAppend", &args, &reply) {
+		}
+		if reply.Err == ErrWrongLeader {
+			server = ck.randomServer()
+		} else if reply.Err == OK {
+			ck.lastLeader = server
+			ck.seqNumber = nrand()
+			return
+		}
 	}
 }
 
