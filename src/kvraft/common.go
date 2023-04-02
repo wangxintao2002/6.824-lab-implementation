@@ -6,22 +6,8 @@ const (
 	ErrWrongLeader       = "ErrWrongLeader"
 	ErrDuplicatedRequest = "ErrDuplicatedRequest"
 	ErrOperation         = "ErrOperation"
+	ErrTimeout           = "ErrTimeout"
 )
-
-type Set map[int64]struct{}
-
-func (s Set) Has(key int64) bool {
-	_, ok := s[key]
-	return ok
-}
-
-func (s Set) Add(key int64) {
-	s[key] = struct{}{}
-}
-
-func (s Set) Delete(key int64) {
-	delete(s, key)
-}
 
 type Err string
 
@@ -35,7 +21,7 @@ type PutAppendArgs struct {
 	// otherwise RPC will break.
 	ClerkId int64
 	// for deduplicate
-	SeqNumber int64
+	SeqNumber int
 }
 
 type PutAppendReply struct {
@@ -45,8 +31,8 @@ type PutAppendReply struct {
 type GetArgs struct {
 	Key string
 	// You'll have to add definitions here.
-	ClerkId int64
-	// for deduplicate
+	ClerkId   int64
+	SeqNumber int
 }
 
 type GetReply struct {

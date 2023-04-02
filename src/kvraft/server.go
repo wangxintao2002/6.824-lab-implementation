@@ -4,10 +4,10 @@ import (
 	"6.824/labgob"
 	"6.824/labrpc"
 	"6.824/raft"
-	"fmt"
 	"log"
 	"sync"
 	"sync/atomic"
+	"time"
 )
 
 const Debug = false
@@ -23,22 +23,29 @@ type Op struct {
 	// Your definitions here.
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
-	Type  string
-	Key   string
-	Value string
+	Type      string
+	Key       string
+	Value     string
+	ClientId  int64
+	RequestId int
+}
+
+type Command struct {
+	Term  int
+	Index string
 }
 
 type KVServer struct {
-	mu      sync.Mutex
-	me      int
-	rf      *raft.Raft
-	applyCh chan raft.ApplyMsg
-	dead    int32 // set by Kill()
+	mu                 sync.Mutex
+	me                 int
+	rf                 *raft.Raft
+	applyCh            chan raft.ApplyMsg
+	committedCommandCh map[int]chan Command // communicate between main and applier
+	dead               int32                // set by Kill()
 
-	maxraftstate int // snapshot if log grows this big
-	seqNumberSet Set // last seqNumber this server has handled
+	maxraftstate int           // snapshot if log grows this big
+	seqNumberSet map[int64]int // last seqNumber this server has handled
 	data         map[string]string
-	applyCond    *sync.Cond
 	lastApplied  int
 
 	// Your definitions here.
@@ -46,46 +53,94 @@ type KVServer struct {
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
-	kv.mu.Lock()
-	defer kv.mu.Unlock()
-	index, term, isLeader := kv.rf.Start(Op{
-		Type: "Get",
-		Key:  args.Key,
-	})
+	if kv.killed() {
+		reply.Err = ErrWrongLeader
+		return
+	}
+	_, isLeader := kv.rf.GetState()
 	if !isLeader {
 		reply.Err = ErrWrongLeader
 		return
 	}
-	// TODO: wait until raft commit this command
-	// Bug: no requests, no apply
-	ok := kv.apply(index, term)
-	if !ok {
-		reply.Err = ErrOperation
+	index, term, _ := kv.rf.Start(Op{
+		Type:      "Get",
+		Key:       args.Key,
+		Value:     "",
+		ClientId:  args.ClerkId,
+		RequestId: args.SeqNumber,
+	})
+	ch := kv.getChan(index)
+	defer func() {
+		kv.mu.Lock()
+		delete(kv.committedCommandCh, index)
+		kv.mu.Unlock()
+	}()
+	select {
+	case command := <-ch:
+		if command.Term == term {
+			reply.Err = OK
+			reply.Value = kv.data[command.Index]
+			return
+		} else {
+			reply.Err = ErrOperation
+			return
+		}
+
+	case <-time.After(1000 * time.Millisecond):
+		reply.Err = ErrTimeout
 		return
 	}
-	reply.Err = OK
-	reply.Value = kv.data[args.Key]
+}
+
+func (kv *KVServer) getChan(index int) chan Command {
+	kv.mu.Lock()
+	defer kv.mu.Unlock()
+	ch, ok := kv.committedCommandCh[index]
+	if !ok {
+		ch = make(chan Command, 1)
+		kv.committedCommandCh[index] = ch
+	}
+	return ch
 }
 
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	// Your code here.
-	kv.mu.Lock()
-	defer kv.mu.Unlock()
-	if kv.seqNumberSet.Has(args.SeqNumber) {
-		reply.Err = ErrDuplicatedRequest
+	if kv.killed() {
+		reply.Err = ErrWrongLeader
 		return
 	}
-	index, term, isLeader := kv.rf.Start(Op{Type: args.Op, Key: args.Key, Value: args.Value})
+	_, isLeader := kv.rf.GetState()
 	if !isLeader {
 		reply.Err = ErrWrongLeader
 		return
 	}
-	ok := kv.apply(index, term)
-	if !ok {
-		reply.Err = ErrOperation
+	index, term, _ := kv.rf.Start(Op{
+		Type:      args.Op,
+		Key:       args.Key,
+		Value:     args.Value,
+		ClientId:  args.ClerkId,
+		RequestId: args.SeqNumber,
+	})
+	ch := kv.getChan(index)
+	defer func() {
+		kv.mu.Lock()
+		delete(kv.committedCommandCh, index)
+		kv.mu.Unlock()
+	}()
+	select {
+	case command := <-ch:
+		if command.Term == term {
+			reply.Err = OK
+			return
+		} else {
+			reply.Err = ErrOperation
+			return
+		}
+
+	case <-time.After(1000 * time.Millisecond):
+		reply.Err = ErrTimeout
 		return
 	}
-	reply.Err = OK
 }
 
 // Kill
@@ -129,48 +184,55 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv := new(KVServer)
 	kv.me = me
 	kv.maxraftstate = maxraftstate
-	kv.seqNumberSet = make(Set)
+	kv.seqNumberSet = make(map[int64]int)
 	kv.data = make(map[string]string)
+	kv.committedCommandCh = make(map[int]chan Command)
 	// You may need initialization code here.
 
 	kv.applyCh = make(chan raft.ApplyMsg)
 	kv.rf = raft.Make(servers, me, persister, kv.applyCh)
-	kv.applyCond = sync.NewCond(&kv.mu)
 	kv.lastApplied = 0
 
-	// You may need initialization code here.
+	go kv.apply()
 
 	return kv
 }
 
-func (kv *KVServer) apply(index int, term int) bool {
-	for m := range kv.applyCh {
+func (kv *KVServer) ifDuplicate(clientId int64, seqId int) bool {
+	kv.mu.Lock()
+	defer kv.mu.Unlock()
+
+	lastSeqId, exist := kv.seqNumberSet[clientId]
+	if !exist {
+		return false
+	}
+	return seqId <= lastSeqId
+}
+
+func (kv *KVServer) apply() {
+	for !kv.killed() {
+		m := <-kv.applyCh
 		if m.SnapshotValid {
 			kv.rf.CondInstallSnapshot(m.SnapshotTerm, m.SnapshotIndex, m.Snapshot)
 			kv.lastApplied = m.SnapshotIndex
 		} else if m.CommandValid && kv.lastApplied < m.CommandIndex { // after installing snapshot, lastApplied may increase
 			command := m.Command.(Op)
-			value, ok := kv.data[command.Key]
-			if command.Type == "Put" || command.Type == "Append" && !ok {
-				fmt.Printf("Append or Put key:%v value:%v ok(command index: %d)\n", command.Key, command.Value, m.CommandIndex)
-				kv.data[command.Key] = command.Value
-			} else if command.Type == "Append" {
-				fmt.Printf("Append key:%v value:%v ok(command index: %d)\n", command.Key, command.Value, m.CommandIndex)
-				kv.data[command.Key] += value
-			} else if command.Type == "Get" {
-				fmt.Printf("Get key:%v ok(command index: %d)\n", command.Key, m.CommandIndex)
+			if !kv.ifDuplicate(command.ClientId, command.RequestId) {
+				kv.mu.Lock()
+				switch command.Type {
+				case "Put":
+					//fmt.Printf("%d appending %v\n", kv.me, command.Value)
+					kv.data[command.Key] = command.Value
+					//fmt.Printf("%d Append or Put key:%v new value:%v ok(command index: %d)\n", kv.me, command.Key, kv.data[command.Key], m.CommandIndex)
+				case "Append":
+					kv.data[command.Key] = "" + kv.data[command.Key] + command.Value
+					//fmt.Printf("%d Append key:%v value:%v ok(command index: %d)\n", kv.me, command.Key, kv.data[command.Key], m.CommandIndex)
+				}
+				kv.mu.Unlock()
 			}
 			kv.lastApplied = m.CommandIndex
-			// Log Matching rule
-			if index == m.CommandIndex {
-				if term == m.CommandTerm {
-					return true
-				} else {
-					return false
-				}
-			}
 			// TODO: make snapshot
+			kv.getChan(m.CommandIndex) <- Command{m.CommandTerm, command.Key}
 		}
 	}
-	return false
 }

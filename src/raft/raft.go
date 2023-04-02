@@ -735,7 +735,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	term = rf.currentTerm
 	index = rf.lastLog().Index + 1
 	log := Log{Term: term, Cmd: command, Index: index}
-	fmt.Printf("[%v]: term %v Start %#v\n", rf.me, term, log)
+	//fmt.Printf("[%v]: term %v Start %#v\n", rf.me, term, log)
 	rf.logs = append(rf.logs, log)
 	rf.persist()
 	// index start from 1
@@ -848,7 +848,7 @@ func (rf *Raft) applier() {
 				CommandIndex: rf.lastApplied,
 				CommandTerm:  rf.logAt(rf.lastApplied).Term,
 			}
-			fmt.Printf("[%v]: COMMIT %d: %#v\n", rf.me, rf.lastApplied, rf.logAt(rf.lastApplied))
+			//fmt.Printf("[%v]: COMMIT %d: %#v\n", rf.me, rf.lastApplied, rf.logAt(rf.lastApplied))
 			rf.mu.Unlock()
 			rf.applyCh <- applyMsg
 			rf.mu.Lock()
