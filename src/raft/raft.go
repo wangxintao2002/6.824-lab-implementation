@@ -144,7 +144,7 @@ func (rf *Raft) readPersist(data []byte) {
 		rf.lastApplied = lastIncludedIndex
 		rf.commitedIndex = lastIncludedIndex
 	}
-	rf.printState()
+	//rf.printState()
 }
 
 // CondInstallSnapshot A service wants to switch to snapshot.  Only do so if Raft hasn't
@@ -548,7 +548,7 @@ func (rf *Raft) handleRequestVote(server int, args *RequestVoteArgs, votes *int)
 			// initialize to leader's last log+1
 			rf.nextIndex[i] = rf.lastIndex() + 1
 		}
-		rf.printState()
+		//rf.printState()
 
 		// sending heartsbeats
 		rf.leaderAppendEntries(true)

@@ -2,7 +2,6 @@ package kvraft
 
 import (
 	"6.824/labrpc"
-	"fmt"
 )
 import "crypto/rand"
 import "math/big"
@@ -26,7 +25,7 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck := new(Clerk)
 	ck.servers = servers
 	ck.clerkId = nrand()
-	ck.seqNumber = 1
+	ck.seqNumber = 0
 	ck.lastLeader = 0
 	// You'll have to add code here.
 	return ck
@@ -48,7 +47,7 @@ func (ck *Clerk) Get(key string) string {
 
 	// choose a random server to request
 	server := ck.lastLeader
-	fmt.Printf("%d Get key:%v\n", ck.clerkId, key)
+	//fmt.Printf("%d Get key:%v\n", ck.clerkId, key)
 	// keep trying forever
 	for {
 		reply := GetReply{}
@@ -58,6 +57,7 @@ func (ck *Clerk) Get(key string) string {
 			continue
 		} else if reply.Err == OK {
 			ck.lastLeader = server
+			ck.seqNumber++
 			return reply.Value
 		} else if reply.Err == ErrNoKey {
 			return ""
@@ -85,7 +85,7 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 		SeqNumber: ck.seqNumber,
 	}
 	server := ck.lastLeader
-	fmt.Printf("%d %s key:%v, value: %v\n", ck.clerkId, op, key, value)
+	//fmt.Printf("%d %s key:%v, value: %v\n", ck.clerkId, op, key, value)
 	for {
 		reply := PutAppendReply{}
 		ok := ck.servers[server].Call("KVServer.PutAppend", &args, &reply)

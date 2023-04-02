@@ -79,7 +79,9 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	case command := <-ch:
 		if command.Term == term {
 			reply.Err = OK
+			kv.mu.Lock()
 			reply.Value = kv.data[command.Index]
+			kv.mu.Unlock()
 			return
 		} else {
 			reply.Err = ErrOperation
@@ -228,6 +230,7 @@ func (kv *KVServer) apply() {
 					kv.data[command.Key] = "" + kv.data[command.Key] + command.Value
 					//fmt.Printf("%d Append key:%v value:%v ok(command index: %d)\n", kv.me, command.Key, kv.data[command.Key], m.CommandIndex)
 				}
+				kv.seqNumberSet[command.ClientId] = command.RequestId
 				kv.mu.Unlock()
 			}
 			kv.lastApplied = m.CommandIndex
