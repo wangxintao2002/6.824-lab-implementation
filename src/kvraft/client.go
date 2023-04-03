@@ -43,6 +43,11 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 // must match the declared types of the RPC handler function's
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) Get(key string) string {
+	// need to update seqNumber first
+	// if seqNumber is updated until RPC succeed, then the request
+	// that comes first will have seqNumber larger than the request which comes
+	// later but succeed before former request
+	ck.seqNumber++
 	args := GetArgs{Key: key, ClerkId: ck.clerkId, SeqNumber: ck.seqNumber}
 
 	// choose a random server to request
@@ -57,7 +62,6 @@ func (ck *Clerk) Get(key string) string {
 			continue
 		} else if reply.Err == OK {
 			ck.lastLeader = server
-			ck.seqNumber++
 			return reply.Value
 		} else if reply.Err == ErrNoKey {
 			return ""
@@ -77,6 +81,7 @@ func (ck *Clerk) Get(key string) string {
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 	// You will have to modify this function.
+	ck.seqNumber++
 	args := PutAppendArgs{
 		Key:       key,
 		Value:     value,
@@ -93,7 +98,6 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 			server = (server + 1) % len(ck.servers)
 		} else if reply.Err == OK {
 			ck.lastLeader = server
-			ck.seqNumber++
 			return
 		}
 		server = (server + 1) % len(ck.servers)
