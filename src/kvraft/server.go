@@ -4,6 +4,7 @@ import (
 	"6.824/labgob"
 	"6.824/labrpc"
 	"6.824/raft"
+	"bytes"
 	"log"
 	"sync"
 	"sync/atomic"
@@ -194,7 +195,9 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.applyCh = make(chan raft.ApplyMsg)
 	kv.rf = raft.Make(servers, me, persister, kv.applyCh)
 	kv.lastApplied = 0
-
+	snapshot := kv.rf.ReadSnapshot()
+	kv.DecodeSnapshot(snapshot)
+	// fmt.Printf("%d read state: kv %#v set %#v\n",kv.me, kv.data,kv.seqNumberSet)
 	go kv.apply()
 
 	return kv
@@ -211,12 +214,45 @@ func (kv *KVServer) ifDuplicate(clientId int64, seqId int) bool {
 	return seqId <= lastSeqId
 }
 
+func (kv *KVServer) MakeSnapshot() []byte {
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+	kv.mu.Lock()
+	data := kv.data
+	seqSet := kv.seqNumberSet
+	//fmt.Printf("%d make state: kv %#v set %#v\n",kv.me, kv.data,kv.seqNumberSet)
+	kv.mu.Unlock()
+	_ = e.Encode(data)
+	_ = e.Encode(seqSet)
+	return w.Bytes()
+}
+
+func (kv *KVServer) DecodeSnapshot(snapshot []byte) {
+	if snapshot == nil || len(snapshot) == 0 {
+		return
+	}
+	r := bytes.NewBuffer(snapshot)
+	d := labgob.NewDecoder(r)
+	var data map[string]string
+	var seqSet map[int64]int
+	if d.Decode(&data) == nil && d.Decode(&seqSet) == nil {
+		kv.data = data
+		kv.seqNumberSet = seqSet
+	} else {
+	}
+}
+
 func (kv *KVServer) apply() {
 	for !kv.killed() {
 		m := <-kv.applyCh
 		if m.SnapshotValid {
-			kv.rf.CondInstallSnapshot(m.SnapshotTerm, m.SnapshotIndex, m.Snapshot)
-			kv.lastApplied = m.SnapshotIndex
+			if kv.rf.CondInstallSnapshot(m.SnapshotTerm, m.SnapshotIndex, m.Snapshot) {
+				kv.mu.Lock()
+				kv.DecodeSnapshot(m.Snapshot)
+				//fmt.Printf("%d install snapshot: kv %#v set %#v\n", kv.me, kv.data, kv.seqNumberSet)
+				kv.lastApplied = m.SnapshotIndex
+				kv.mu.Unlock()
+			}
 		} else if m.CommandValid && kv.lastApplied < m.CommandIndex { // after installing snapshot, lastApplied may increase
 			command := m.Command.(Op)
 			if !kv.ifDuplicate(command.ClientId, command.RequestId) {
@@ -234,8 +270,11 @@ func (kv *KVServer) apply() {
 				kv.mu.Unlock()
 			}
 			kv.lastApplied = m.CommandIndex
-			// TODO: make snapshot
 			kv.getChan(m.CommandIndex) <- Command{m.CommandTerm, command.Key}
+			if kv.maxraftstate != -1 && kv.rf.GetStateSize() > kv.maxraftstate {
+				snapshot := kv.MakeSnapshot()
+				kv.rf.Snapshot(m.CommandIndex, snapshot)
+			}
 		}
 	}
 }
